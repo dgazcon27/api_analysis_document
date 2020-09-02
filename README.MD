@@ -1,4 +1,4 @@
-#API BASE
+# API BASE
 
 This API y developed with Flask and Flask-RestFul. It work for initial projects, only have one model User with basic field
 	-name
@@ -48,4 +48,10 @@ $ flask db init
 $ flask db migrate -m "Initial_db"
 $ flask db upgrade
 ```
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
+Please make sure to update tests as appropriate.
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
