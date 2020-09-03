@@ -7,3 +7,5 @@ class UserSchema(ma.Schema):
 	lastname = fields.String()
 	birthday = fields.String()
 	direction = fields.String()
+	email = fields.String()
+	username = fields.String()

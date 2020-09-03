@@ -4,7 +4,8 @@ from flask_restful import Api
 from app.common.error_handling import ObjectNotFound, AppErrorBaseClass
 from app.db import db
 from app.users.api_v1_0.resources import user_v1_0_bp
-from .ext import ma, migrate
+from app.auth.api_v1_0.resources import auth_v1_0_bp
+from .ext import ma, migrate, jwt
 
 
 def create_app(settings_module):
@@ -14,6 +15,7 @@ def create_app(settings_module):
     # Inicializa las extensiones
     db.init_app(app)
     ma.init_app(app)
+    jwt.init_app(app)
     migrate.init_app(app, db)
 
     # Captura todos los errores 404
@@ -24,6 +26,7 @@ def create_app(settings_module):
 
     # Registra los blueprints
     app.register_blueprint(user_v1_0_bp)
+    app.register_blueprint(auth_v1_0_bp)
 
     # Registra manejadores de errores personalizados
     register_error_handlers(app)
@@ -34,7 +37,7 @@ def create_app(settings_module):
 def register_error_handlers(app):
     @app.errorhandler(Exception)
     def handle_exception_error(e):
-        return jsonify({'msg': 'Internal server error'}), 500
+        return jsonify({'msg': str(e)}), 500
 
     @app.errorhandler(405)
     def handle_405_error(e):
