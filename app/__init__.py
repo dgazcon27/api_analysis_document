@@ -6,10 +6,12 @@ from app.db import db
 from app.users.api_v1_0.resources import user_v1_0_bp
 from app.auth.api_v1_0.resources import auth_v1_0_bp
 from .ext import ma, migrate, jwt
+from flask_cors import CORS
 
 
 def create_app(settings_module):
     app = Flask(__name__)
+    CORS(app)
     app.config.from_object(settings_module)
 
     # Inicializa las extensiones
