@@ -11,9 +11,10 @@ class User(db.Model, BaseModelMixin):
     password = db.Column(db.String(255), nullable=False)
     birthday = db.Column(db.String(255))
     direction = db.Column(db.String(255))
-    auth = db.relationship("Auth", uselist=False, cascade='all, delete-orphan')
+    auth = db.relationship('Auth', uselist=False, cascade='all, delete-orphan')
+    documents = db.relationship('Documents', cascade='all, delete-orphan')
 
-    def __init__(self, name="", lastname="", birthday="", direction="", password="", email="", username=""):
+    def __init__(self, name='', lastname='', birthday='', direction='', password='', email="", username=""):
         self.name = name
         self.lastname = lastname
         self.birthday = birthday

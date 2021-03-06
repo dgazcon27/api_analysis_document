@@ -12,13 +12,13 @@ api = Api(user_v1_0_bp)
 
 
 class UserListResource(Resource):
-    @jwt_required
+    @jwt_required()
     def get(self):
         users = User.get_all()
         result = user_schema.dump(users, many=True)
         return result
 
-    @jwt_required
+    @jwt_required()
     def post(self):
         data = request.get_json()
         user_check = user_schema.load(data)
@@ -37,7 +37,7 @@ class UserListResource(Resource):
 
 
 class UserResource(Resource):
-    @jwt_required
+    @jwt_required()
     def get(self, user_id):
         user = User.get_by_id(user_id)
         resp = user_schema.dump(user)
